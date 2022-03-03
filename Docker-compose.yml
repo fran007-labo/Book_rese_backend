@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+  backend:
+    build: 
+      context: ./backend/
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f /Book_rese/tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    image: rails:dev
+    volumes:
+      - ./backend:/Book-rese
+      - ./backend/vendor/bundle:/Book-rese/vendor/bundle
+    environment:
+      TZ: Asia/Tokyo
+      RAILS_ENV: development
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  # frontend:
+  #   build: 
+  #     context: ./frontend/
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./frontend:/usr/src/app
+  #   command: sh -c "cd Book-rese && yarn start"
+  #   ports:
+  #     - "9000:9000"
+volumes:
+  postgres-data:
+    driver: local
