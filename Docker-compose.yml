@@ -11,7 +11,7 @@ services:
     build: 
       context: ./backend/
       dockerfile: Dockerfile
-    command: /bin/sh -c "rm -f /Book_rese/backend/tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f ./backend/tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
     image: rails:dev
     volumes:
       - ./backend:/Book-rese
