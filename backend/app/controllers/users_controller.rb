@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new(user_parameter)
+    @user = User.new
     render json: { status: 200, message: "Hello World!"}
   end 
 
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_parameter)
     if @client.save
       redirect_to @client
-    else
+    end
   end
 
   private
