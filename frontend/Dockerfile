@@ -1,2 +1,4 @@
-FROM node:12.22-alpine3.11  
+FROM node:14.13.1 
 WORKDIR /usr/src/app
+RUN npm install --save prop-types
+RUN npm install -g create-react-app

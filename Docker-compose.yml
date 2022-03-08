@@ -23,15 +23,16 @@ services:
       - 8000:8000
     depends_on:
       - db
-  # frontend:
-  #   build: 
-  #     context: ./frontend/
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./frontend:/usr/src/app
-  #   command: sh -c "cd Book-rese && yarn start"
-  #   ports:
-  #     - "9000:9000"
+  frontend:
+    build: 
+      context: ./frontend/
+      dockerfile: Dockerfile
+    tty: true
+    volumes:
+      - ./frontend:/usr/src/app
+    command: sh -c "cd book_rese && yarn start"
+    ports:
+      - "9000:9000"
 volumes:
   postgres-data:
     driver: local
