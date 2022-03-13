@@ -64,6 +64,11 @@ GEM
     crass (1.0.6)
     diff-lcs (1.5.0)
     erubi (1.10.0)
+    factory_bot (6.2.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -142,6 +147,8 @@ GEM
       rspec-support (~> 3.10)
     rspec-support (3.11.0)
     spring (2.1.1)
+    spring-commands-rspec (1.0.4)
+      spring (>= 0.9.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
       spring (>= 1.2, < 3.0)
@@ -167,12 +174,14 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  factory_bot_rails
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.4, >= 6.0.4.6)
   rspec-rails (~> 5.0.0)
   spring
+  spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
 
