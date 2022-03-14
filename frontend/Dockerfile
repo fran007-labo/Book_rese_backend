@@ -1,4 +1,3 @@
-FROM node:14.13.1 
+FROM node:16-alpine
 WORKDIR /usr/src/app
-RUN npm install --save prop-types
-RUN npm install -g create-react-app
+EXPOSE 9000
