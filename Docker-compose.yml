@@ -30,9 +30,9 @@ services:
     tty: true
     volumes:
       - ./frontend:/usr/src/app
-    command: sh -c "cd front-react && yarn start"
+    command: sh -c "yarn start"
     ports:
-      - 9000:9000
+      - 3000:3000
 volumes:
   postgres-data:
     driver: local
