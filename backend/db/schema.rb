@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_091928) do
+ActiveRecord::Schema.define(version: 2022_04_02_043911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "book_images", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "image_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_images_on_book_id"
+    t.index ["image_id"], name: "index_book_images_on_image_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "src"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.date "start_date", null: false
+    t.date "return_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_reservations_on_book_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
@@ -22,4 +60,8 @@ ActiveRecord::Schema.define(version: 2022_03_05_091928) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "book_images", "books"
+  add_foreign_key "book_images", "images"
+  add_foreign_key "reservations", "books"
+  add_foreign_key "reservations", "users"
 end
