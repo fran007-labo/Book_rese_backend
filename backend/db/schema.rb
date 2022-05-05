@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.string "src"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -45,8 +44,8 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "book_id", null: false
-    t.date "start_date", null: false
-    t.date "return_date", null: false
+    t.date "start_date"
+    t.date "return_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reservations_on_book_id"
