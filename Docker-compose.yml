@@ -23,16 +23,23 @@ services:
       - 8000:8000
     depends_on:
       - db
-  frontend:
-    build: 
-      context: ./frontend/
-      dockerfile: Dockerfile
-    tty: true
-    volumes:
-      - ./frontend:/app
-    command: sh -c "yarn start"
+      - redis
+  redis:
+    image: redis
     ports:
-      - 3000:3000
+      - 6379:6379
+    volumes:
+      - "./app/redis:/data"
+  # frontend:
+  #   build: 
+  #     context: ./frontend/
+  #     dockerfile: Dockerfile
+  #   tty: true
+  #   volumes:
+  #     - ./frontend:/app
+  #   command: sh -c "yarn start"
+  #   ports:
+  #     - 3000:3000
 volumes:
   postgres-data:
     driver: local
