@@ -1,25 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import Container from '@mui/material/Container';
-import UsersList from './components/User/UserList';
-import Api from './Api';
+import React from 'react';
+import { Header, Content, About, PostContent } from './components/index';
+import Grid from '@material-ui/core/Grid';
 
-const App = () => { 
-  const [users, setUsers] = useState([]);
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 
-  useEffect(() => {
-    const getUser = async () => {
-      const response = await Api.get('/users');
-      console.log(response.data);
-      setUsers(response.data);
-    }
-    getUser()
-  }, [])
-
+export default function App() {
   return (
-    <Container maxWidth="sm">
-      <UsersList />
-    </Container>
-  );
+    <div className="App">
+      <Grid container direction="column">
+        <Grid item>
+          <Header />
+        </Grid>
+        <Grid item container>
+          <Grid item sm={2} />
+          <Grid item xs={12} sm={8}>
+            {/* <Content /> */}
+            <BrowserRouter>
+              <Routes>
+                <Route path={"/"} 
+                  element={<Content />} 
+                />
+                <Route path={"/about"} 
+                  element={<About />} 
+                />
+                <Route path={"/post/:id"} 
+                  element={<PostContent />} 
+                />
+              </Routes>
+            </ BrowserRouter>
+          </Grid>
+          <Grid item sm={2} />
+        </Grid>
+      </Grid>
+    </div>
+  )
 }
-
-export default App

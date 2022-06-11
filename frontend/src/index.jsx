@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserList from './components/UserList';
+import App from './App';
 
 ReactDOM.render(
-  <UserList />, document.getElementById('root')
-  // <UserList />, document.getElementById('root')
+  <App />, document.getElementById('root')
 );
