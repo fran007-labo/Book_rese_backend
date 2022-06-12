@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Content, About, PostContent } from './components/index';
+import { Header, Content, About, PostContent, Home } from './components/index';
 import Grid from '@material-ui/core/Grid';
 
 import {
@@ -11,6 +11,7 @@ import {
 export default function App() {
   return (
     <div className="App">
+      <Home />
       <Grid container direction="column">
         <Grid item>
           <Header />
@@ -18,11 +19,13 @@ export default function App() {
         <Grid item container>
           <Grid item sm={2} />
           <Grid item xs={12} sm={8}>
-            {/* <Content /> */}
+            <Content />
             <BrowserRouter>
               <Routes>
                 <Route path={"/"} 
-                  element={<Content />} 
+                  element={
+                  <Content />
+                } 
                 />
                 <Route path={"/about"} 
                   element={<About />} 
