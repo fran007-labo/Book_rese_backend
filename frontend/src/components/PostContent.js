@@ -7,8 +7,8 @@ import BodyCard from './BodyCard';
 
 const cardContent = 
     {
-        avatarUrl: "https://joeschmoe.io/api/v1/random",
-        imageUrl: "https://picsum.photos/150"
+      avatarUrl: "https://joeschmoe.io/api/v1/random",
+      imageUrl: "https://picsum.photos/150"
     }
 
 function PostContent() {
