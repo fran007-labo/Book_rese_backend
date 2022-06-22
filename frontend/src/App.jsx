@@ -11,7 +11,7 @@ import {
 export default function App() {
   return (
     <div className="App">
-      <Home />
+      <Home /> 
       <Grid container direction="column">
         <Grid item>
           <Header />

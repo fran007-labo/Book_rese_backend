@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth"
 
-const sampleId = process.env.REACT_APP_FIREBASE_APIKEY;
 const firebaseConfig = {
   apiKey:            process.env.REACT_APP_FIREBASE_APIKEY,
   authDomain:        process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
@@ -10,6 +9,7 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINGSENDERID,
   appId:             process.env.REACT_APP_FIREBASE_APPID,
   measurementId:     process.env.REACT_APP_FIREBASE_MEASUREMENTID
+  
 };
 
 // Initialize Firebase
