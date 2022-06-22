@@ -1,8 +1,8 @@
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import React from 'react'
 import { auth, provider } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { axios } from 'axios';
+import axios from 'axios';
 
 export default function Home() {
   const [user] = useAuthState(auth);
@@ -26,31 +26,15 @@ function SingInButton() {
   const SingInWithGoogle = () => {
     signInWithPopup(auth, provider)
     .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      // The signed-in user info.
-      const user = result.user;
+      const url = 'http://localhost:8000/api/v1/registrations';
+      const user = result.user
+      const data = { name: user.displayName, email: user.email, uid: user.uid }
+      user.getIdToken().then(idToken => {
+        axios.post(url, { token: idToken, registration: data });
+      })
 
-      console.log(token)
-      console.log(user.accessToken);
-      console.log(user.displayName);
-      console.log(user.email);
-      console.log(user.uid);
-      
-      // const url = 'http://localhost:8000/api/v1/users/registrations';
-      // axios.post(url, token);
-      // ...
     }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.customData.email;
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error);
       console.log('error Occur')
-      // ...
     });
   } 
   return (
@@ -62,8 +46,14 @@ function SingInButton() {
 
 // サインアウト
 function SingOutButton() {
+  const singOut = () => {
+    const url = 'http://localhost:8000/api/v1/sign_outs'
+    axios.post(url);
+    auth.signOut();
+  }
+
   return (
-    <button onClick={() => auth.signOut()}>
+    <button onClick={() => singOut()}>
       <p>サインアウト</p>
     </button>
   )

@@ -13,6 +13,8 @@ services:
       dockerfile: Dockerfile
     command: /bin/sh -c "rm -f ./backend/tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
     image: rails:dev
+    stdin_open: true
+    tty: true
     volumes:
       - ./backend:/Book-rese
       - ./backend/vendor/bundle:/Book-rese/vendor/bundle

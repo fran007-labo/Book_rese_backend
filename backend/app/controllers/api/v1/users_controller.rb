@@ -10,15 +10,6 @@ class Api::V1::UsersController < ApplicationController
     render json: @user
   end
 
-  def create
-    user = User.new(user_params)
-    if user.save
-      render json: user
-    else
-      render json: user.errors
-    end
-  end
-
   def update
     if @user.update(user_params)
       render json: @user
@@ -39,10 +30,6 @@ class Api::V1::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def post_params
-    params.require(:user).permit(:name, :email)
   end
 
 end
