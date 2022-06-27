@@ -1,7 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import RouterConfig from "./RouterConfig";
+import Header  from './components/Common/Header';
+import { BrowserRouter } from "react-router-dom";
+import Grid from '@material-ui/core/Grid';
 
 ReactDOM.render(
-  <App />, document.getElementById('root')
+  <React.StrictMode>
+    <BrowserRouter>
+      <Grid container direction="column">
+        <Grid item>
+          <Header />
+        </Grid>
+
+        <RouterConfig />
+      </Grid>
+      </BrowserRouter>
+    {/* <RouterConfig /> */}
+  </React.StrictMode>, document.getElementById('root')
 );

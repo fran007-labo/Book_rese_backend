@@ -1,10 +1,11 @@
-import { signInWithPopup } from 'firebase/auth'
 import React from 'react'
+import { signInWithPopup } from 'firebase/auth'
 import { auth, provider } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Button from '@mui/material/Button';
 import axios from 'axios';
 
-export default function Home() {
+export default function FirebaseAuth() {
   const [user] = useAuthState(auth);
 
   return (
@@ -38,9 +39,11 @@ function SingInButton() {
     });
   } 
   return (
-    <button onClick={SingInWithGoogle}>
-      <p>グーグルでサインイン</p>
-    </button>
+    <div>
+      <Button onClick={SingInWithGoogle}>
+        グーグルでサインイン
+      </Button>
+    </div> 
   )
 }
 
@@ -53,9 +56,11 @@ function SingOutButton() {
   }
 
   return (
-    <button onClick={() => singOut()}>
-      <p>サインアウト</p>
-    </button>
+    <div>
+      <Button onClick={() => singOut()}>
+        サインアウト
+      </Button>
+    </div>
   )
 }
 
