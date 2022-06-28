@@ -8,7 +8,6 @@ class Api::V1::RegistrationsController < ApplicationController
       user = User.create!(sign_up_params)
       render json: user, status: :ok
     else
-      render json: user, status: :ok
     end
   end
 

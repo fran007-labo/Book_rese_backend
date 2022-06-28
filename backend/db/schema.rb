@@ -16,12 +16,10 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
   enable_extension "plpgsql"
 
   create_table "book_images", force: :cascade do |t|
-    t.bigint "book_id"
-    t.bigint "image_id"
+    t.integer "book_id", null: false
+    t.integer "image_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["book_id"], name: "index_book_images_on_book_id"
-    t.index ["image_id"], name: "index_book_images_on_image_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -61,8 +59,6 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "book_images", "books"
-  add_foreign_key "book_images", "images"
   add_foreign_key "reservations", "books"
   add_foreign_key "reservations", "users"
 end
