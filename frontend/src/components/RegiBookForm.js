@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   Button,
   Grid,
@@ -14,28 +14,61 @@ import {
 } from "@material-ui/core";
 
 import {
-  DateRange as DateRangeIcon,
-  Room as RoomIcon,
-  Business as BusinessIcon,
-  GitHub as GitHubIcon,
-  Twitter as TwitterIcon,
-  Facebook as FacebootIcon,
-  Instagram as InstagramIcon,
-  Web as WebIcon,
   AddAPhoto as AddAPhotoIcon,
-  SentimentVerySatisfied as SentimentVerySatisfiedIcon,
-  SentimentSatisfied as SentimentSatisfiedIcon,
-  SentimentVeryDissatisfied as SentimentVeryDissatisfiedIcon,
 } from "@material-ui/icons";
 
-
+import axios from 'axios';
 // styels
 import styles from "../styles/RegiBookForm.module.scss";
 
 export default function RegiBookForm() {
+  const [name, setName] = useState("");
+  const [image, setImage] = useState();
+  const [preview, setPreview] = useState("");
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  }
+
+  const  handleOnImages = useCallback((e) => {
+    const file = e.target.files[0]
+    setImage(file);
+  }, [])
+
+  const previewImage = useCallback((e) => {
+    const file = e.target.files[0]
+    setPreview(window.URL.createObjectURL(file))
+  }, [])
+
+  const createFormData = () => { 
+    const formData = new FormData()
+    if (!image) return    
+    formData.append('book[name]', name)
+    formData.append('book[image]', image)
+    return formData
+  }
+
+  const onSubmit = async () => {
+    const url = 'http://localhost:8000/api/v1/books';
+    const data = await createFormData() 
+
+    const confing = { 
+      header: { 
+        'content-type': 'multipart/form-data'
+      }
+    }
+
+    axios.post(url, data, confing)
+    .then(response => {
+      console.log(response);
+    }).catch(error => {
+      console.log(error)
+    })
+  }
+
   return (
     <div className={styles.root}>
-      <form className={styles.form}>
+      <div className={styles.form}>
         <Grid container justifyContent="center" alignItems="center" spacing={3}>
           <Grid item xs={11}>
             <Card className={styles.form_card}>
@@ -54,21 +87,37 @@ export default function RegiBookForm() {
                         <Tooltip title="add">
                           <IconButton className={styles.icon_button}>
                             <Avatar className={styles.avatar}>
-                              <AddAPhotoIcon />
+                              <input
+                                type="file"
+                                onChange={(e) => {
+                                  handleOnImages(e)
+                                  previewImage(e)
+                                }}
+                              />
+                              { preview ?
+                              <img
+                                src={preview}
+                                alt="preview img"
+                                className={styles.preview}
+                              />
+                              : null
+                              }
                             </Avatar>
                           </IconButton>
+                        
                         </Tooltip>
                       </div>
                     </Grid>
                   </Grid>
+
                   <Grid container spacing={3} item xs={9}>
                     <Grid item xs={12}>
                       <TextField
                         margin="normal"
-                        id="name"
                         label="タイトル"
                         fullWidth
                         className={styles.text_field}
+                        onChange={handleNameChange}
                       />
                       <TextField
                         margin="normal"
@@ -83,12 +132,12 @@ export default function RegiBookForm() {
               </CardContent>
               <Box component="span" m={2} className={styles.button_wrapper}>
                 <Button
-                  type="submit"
                   variant="contained"
                   color="primary"
                   className={styles.submit_button}
+                  onClick={onSubmit}
                 >
-                  SUBMIT
+                  送信
                 </Button>
                 <Button
                   type="button"
@@ -97,13 +146,13 @@ export default function RegiBookForm() {
                   onClick={() => null}
                   className={styles.cancel_button}
                 >
-                  CANCEL
+                  リセット
                 </Button>
               </Box>
             </Card>
           </Grid>
         </Grid>
-      </form>
+      </div>
     </div>
   );
 };

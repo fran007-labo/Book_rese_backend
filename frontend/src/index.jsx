@@ -12,10 +12,9 @@ ReactDOM.render(
         <Grid item>
           <Header />
         </Grid>
-
         <RouterConfig />
       </Grid>
       </BrowserRouter>
-    {/* <RouterConfig /> */}
-  </React.StrictMode>, document.getElementById('root')
+  </React.StrictMode>
+  , document.getElementById('root')
 );
