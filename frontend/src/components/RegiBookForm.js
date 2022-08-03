@@ -13,9 +13,6 @@ import {
   Divider,
 } from "@material-ui/core";
 
-import {
-  AddAPhoto as AddAPhotoIcon,
-} from "@material-ui/icons";
 
 import axios from 'axios';
 // styels

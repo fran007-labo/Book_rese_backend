@@ -1,5 +1,5 @@
 import React from 'react';
-import { Content } from './components/index';
+import { BooksIndex } from './components/Index';
 import Grid from '@material-ui/core/Grid';
 
 
@@ -9,7 +9,7 @@ export default function App() {
       <Grid item container>
         <Grid item sm={2} />
         <Grid item xs={12} sm={8}>
-          <Content />
+          <BooksIndex />
         </Grid>
         <Grid item sm={2} />
       </Grid>

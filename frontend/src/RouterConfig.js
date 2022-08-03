@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
 
-import { RegiBookForm } from './components/index';
+import { RegiBookForm } from './components/Index';
 import App from './App';
 
 export default function RouterConfig() {

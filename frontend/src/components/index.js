@@ -1,7 +1,6 @@
-export {default as FirebaseAuth} from './FirebaseAuth'
-export {default as BodyCard} from './BodyCard'
-export {default as Content} from './Content'
-export {default as About} from './About'
-export {default as PostContent} from './PostContent'
-export {default as MenuButton} from './MenuButton'
-export {default as RegiBookForm} from './RegiBookForm'
+export {default as FirebaseAuth} from './FirebaseAuth';
+export {default as Book} from './Book';
+export {default as BooksIndex} from './BooksIndex';
+export {default as MenuButton} from './MenuButton';
+export {default as RegiBookForm} from './RegiBookForm';
+export {default as Book1} from './Book1';

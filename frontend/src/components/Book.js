@@ -39,10 +39,9 @@ const useStyles = makeStyles({
 });
 
 
-const BodyCard = (props) => {
-  const { userId, id, title, body, avatarUrl, imageUrl } = props;
+const Book = (props) => {
+  const { id, title, body, avatarUrl, imageUrl } = props;
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
   return (
     <Card variant="outlined">
       <CardHeader
@@ -68,4 +67,4 @@ const BodyCard = (props) => {
   );
 }
 
-export default BodyCard
+export default Book
