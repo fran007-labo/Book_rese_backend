@@ -41,7 +41,7 @@ export default function BooksIndex() {
     const bodyBookContent = {...book, ...cardContent};
     return (
       <>
-        <Book1 {...bodyBookContent} />
+        <Book {...bodyBookContent} />
       </>
     );
   };
