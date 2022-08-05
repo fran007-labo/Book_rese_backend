@@ -9,15 +9,15 @@ services:
       POSTGRES_PASSWORD: 'postgres'
   backend:
     build: 
-      context: ./backend/
+      context: ./
       dockerfile: Dockerfile
-    command: /bin/sh -c "rm -f ./backend/tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f ./tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
     image: rails:dev
     stdin_open: true
     tty: true
     volumes:
-      - ./backend:/Book-rese
-      - ./backend/vendor/bundle:/Book-rese/vendor/bundle
+      - ./:/Book-rese-backend
+      - ./vendor/bundle:/Book-rese-backend/vendor/bundle
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development

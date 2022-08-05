@@ -1,4 +1,4 @@
-class Api::V1::SignOutsController < ApplicationController
+class Api::V1::Users::SignOutsController < ApplicationController
 
 	# ログアウト
   def create

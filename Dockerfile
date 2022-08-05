@@ -6,12 +6,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
-RUN mkdir /Book-rese
-WORKDIR /Book-rese
-COPY Gemfile /Book-rese/Gemfile
-COPY Gemfile.lock /Book-rese/Gemfile.lock
+RUN mkdir /Book-rese-backend
+WORKDIR /Book-rese-backend
+COPY Gemfile /Book-rese-backend/Gemfile
+COPY Gemfile.lock /Book-rese-backend/Gemfile.lock
 RUN bundle install
-COPY . /Book-rese
+COPY . /Book-rese-backend
 
 RUN yarn install --check-files
 # RUN bundle exec rails webpacker:compile
