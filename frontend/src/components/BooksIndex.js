@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { Grid } from '@material-ui/core'
-import { Book, Book1 } from './Index'
+import { Book } from './Index'
 import Pagination from '@mui/material/Pagination';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
@@ -33,6 +33,7 @@ export default function BooksIndex() {
   const handleChange = (event, index) => {
     //ページ移動時にページ番号を更新
     setPage(index);
+    
     //ページ移動時に表示データを書き換える
     setDisplayedBooks(books.slice(((index - 1) * displayNum), index * displayNum))
   }
@@ -48,8 +49,7 @@ export default function BooksIndex() {
 
   return (
     <>
-      <div style={{ textAlign: "center" }}>
-        <Pagination count={pageCount} page={page} color="primary" size="large" onChange={handleChange} style={{ display: "inline-block" }} />
+      <div style={{ textAlign: "center", padding: '50px 0'}}>
         <Typography
           component="h1"
           variant="h2"
@@ -73,6 +73,7 @@ export default function BooksIndex() {
           <Button variant="contained">Main call to action</Button>
           <Button variant="outlined">Secondary action</Button>
         </Stack>
+        <Pagination count={pageCount} page={page} color="primary" size="large" onChange={handleChange} style={{ display: "inline-block", padding: '30px'}} />
         <Grid container spacing={2}>
           {displayedBooks.map((book) => 
             <Grid item xs={12} sm={3} key={book.id}>
@@ -80,7 +81,7 @@ export default function BooksIndex() {
             </Grid>
           )}
         </Grid>
-        <Pagination count={pageCount} page={page} color="primary" size="large" onChange={handleChange} style={{ display: "inline-block" }} />
+        <Pagination count={pageCount} page={page} color="primary" size="large" onChange={handleChange} style={{ display: "inline-block", padding: '30px' }} />
       </div>
     </>
   ) 

@@ -27,7 +27,7 @@ function SingInButton() {
   const SingInWithGoogle = () => {
     signInWithPopup(auth, provider)
     .then((result) => {
-      const url = 'http://localhost:8000/api/v1/registrations';
+      const url = 'http://localhost:8000/api/v1/users/registrations';
       const user = result.user
       const data = { name: user.displayName, email: user.email, uid: user.uid }
       user.getIdToken().then(idToken => {
@@ -50,7 +50,7 @@ function SingInButton() {
 // サインアウト
 function SingOutButton() {
   const singOut = () => {
-    const url = 'http://localhost:8000/api/v1/sign_outs'
+    const url = 'http://localhost:8000/api/v1/users/sign_outs'
     axios.post(url);
     auth.signOut();
   }
