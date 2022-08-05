@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
 
   create_table "books", force: :cascade do |t|
     t.string "name"
+    t.integer "user", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -36,6 +37,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
 
   create_table "images", force: :cascade do |t|
     t.string "src"
+    t.integer "user", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
