@@ -10,17 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_02_043911) do
+ActiveRecord::Schema.define(version: 2022_03_30_100048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "book_images", force: :cascade do |t|
-    t.integer "book_id", null: false
-    t.integer "image_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
 
   create_table "books", force: :cascade do |t|
     t.string "name"
@@ -38,8 +31,10 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
   create_table "images", force: :cascade do |t|
     t.string "src"
     t.integer "user", null: false
+    t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_images_on_book_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -61,6 +56,7 @@ ActiveRecord::Schema.define(version: 2022_04_02_043911) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "images", "books"
   add_foreign_key "reservations", "books"
   add_foreign_key "reservations", "users"
 end
