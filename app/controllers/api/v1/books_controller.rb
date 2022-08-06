@@ -1,7 +1,15 @@
 class Api::V1::BooksController < Api::V1::Reservations::ApplicationController
   def index
-    books = Book.all
-    render json: books
+    output = []
+
+    all_books = Book.includes(:images)
+    all_books.each do | book |
+      book_src = book.images.pluck(:src)
+      object = { id: book.id, title: book.name, imageUrl: book_src }
+      output.append(object)
+    end
+
+    render json: output
   end
   
   def update
