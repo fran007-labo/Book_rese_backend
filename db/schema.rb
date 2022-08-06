@@ -30,7 +30,6 @@ ActiveRecord::Schema.define(version: 2022_03_30_100048) do
 
   create_table "images", force: :cascade do |t|
     t.string "src"
-    t.integer "user", null: false
     t.bigint "book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
