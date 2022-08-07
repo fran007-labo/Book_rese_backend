@@ -21,13 +21,13 @@ class Api::V1::BooksController < Api::V1::Reservations::ApplicationController
   end
   
   def create
-    book = Book.create!(name: book_params[:name])
+    book = Book.create!(book_params)
+    
     if book
-      image = Image.create!(src: book_params[:image])
-      book_image = BookImage.create!(book_id: book.id, image_id: image.id)
-      render json: book_image 
-    else 
-      render json: book.errors
+      image = Image.create!(book_id: book.id, image_params)
+      head 200
+    else
+      head 404
     end
   end
 
@@ -41,7 +41,11 @@ class Api::V1::BooksController < Api::V1::Reservations::ApplicationController
 
   private
   def book_params
-    params.require(:books).permit(:name, :image, :user_id)
+    params.require(:books).permit(:title, :author, :publisher, :body).merge(user_id: current_user.id)
+  end
+
+  def image_params
+    params.require(:images).permit(:src)
   end
 
 end

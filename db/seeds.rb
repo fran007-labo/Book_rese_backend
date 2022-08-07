@@ -9,7 +9,7 @@ user = User.create(
     author:    Faker::Book.author, 
     publisher: Faker::Book.publisher,
     body:      Faker::Books::Lovecraft.sentence,
-    user_id:      user.id
+    user_id:   user.id
   )
 
   2.times do 
