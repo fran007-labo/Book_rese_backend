@@ -5,8 +5,11 @@ user = User.create(
 
 50.times do |n|
   Book.create(
-    name:  Faker::Name.name, 
-    user: user.id
+    title:     Faker::Book.title, 
+    author:    Faker::Book.author, 
+    publisher: Faker::Book.publisher,
+    body:      Faker::Books::Lovecraft.sentence,
+    user_id:      user.id
   )
 
   2.times do 

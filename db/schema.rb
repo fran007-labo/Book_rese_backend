@@ -19,9 +19,11 @@ ActiveRecord::Schema.define(version: 2022_03_30_100048) do
     t.string "title", null: false
     t.string "author", null: false
     t.string "publisher"
-    t.integer "user", null: false
+    t.text "body"
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(version: 2022_03_30_100048) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "books", "users"
   add_foreign_key "images", "books"
   add_foreign_key "reservations", "books"
   add_foreign_key "reservations", "users"
