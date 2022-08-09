@@ -1,11 +1,19 @@
-class Api::V1::BooksController < Api::V1::Reservations::ApplicationController
+class Api::V1::BooksController < ApplicationController
+  skip_before_action :authenticate_user, only: [:index]
+
   def index
     output = []
 
     all_books = Book.includes(:images)
     all_books.each do | book |
       book_src = book.images.pluck(:src)
-      object = { id: book.id, title: book.name, imageUrl: book_src }
+      object = 
+      { id: book.id, 
+        title: book.title, 
+        author: book.author,
+        body: book.body,
+        created_at: book.created_at,
+        imageUrl: book_src }
       output.append(object)
     end
 
@@ -22,9 +30,9 @@ class Api::V1::BooksController < Api::V1::Reservations::ApplicationController
   
   def create
     book = Book.create!(book_params)
-    
+
     if book
-      image = Image.create!(book_id: book.id, image_params)
+      # image = Image.create!(book_id: book.id, image_params)
       head 200
     else
       head 404

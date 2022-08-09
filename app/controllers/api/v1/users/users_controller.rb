@@ -1,6 +1,6 @@
 class Api::V1::Users::UsersController < ApplicationController
   before_action :set_user, only: %i[show destroy update]
-
+  
   def index
     users = User.all
     render json: users

@@ -1,13 +1,13 @@
 class Api::V1::Users::RegistrationsController < ApplicationController
+  skip_before_action :authenticate_user
 
-  # サインイン/サインアウト
+  # サインイン
   def create
     raise ArgumentError, 'BadRequest Parameter' if payload.blank?
     user = User.find_by(uid: payload['user_id'])
     if user == nil
       user = User.create!(sign_up_params)
       render json: user, status: :ok
-    else
     end
   end
 
