@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_one :cart, dependent: :destroy
 
-  # def prepare_reservation
-  #   reservation || create_reservation
-  # end
+  def prepare_cart
+    cart || create_cart
+  end
 end
