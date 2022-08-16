@@ -8,15 +8,16 @@ class Api::V1::Carts::AddBooksController < Api::V1::Carts::ApplicationController
 
     if(add_cart.valid?)
       add_cart.save
-      flash = { message: "#{book.name}がカートに追加されました。"}
+      flash = "#{book.title}がカートに追加されました。"
       status = 'success'
     else
-      flash = { message: "既に#{book.name}は追加されています。"}
-      status = 'fail'
+      flash = "既に#{book.title}はカートに追加されています。"
+      status = 'error'
     end
 
     render json: {
-      data: flash
-    }, status: status
+      message: flash,
+      status: status
+    }
   end
 end 
