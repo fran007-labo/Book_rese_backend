@@ -28,3 +28,4 @@ storage/*
 config/master.key
 
 .env
+app/redis/dumps.rdb
