@@ -14,7 +14,7 @@ RUN bundle install
 COPY . /Book-rese-backend
 
 RUN yarn install --check-files
-# RUN bundle exec rails webpacker:compile
+ENV TZ Asia/Tokyo
 
 # Add a script to be executed every time the container starts.
 COPY entrypoint.sh /usr/bin/
