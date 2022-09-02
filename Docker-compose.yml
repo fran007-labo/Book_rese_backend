@@ -12,7 +12,7 @@ services:
   backend:
     build: 
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.development
     command: /bin/sh -c "rm -f ./tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
     image: rails:dev
     stdin_open: true
