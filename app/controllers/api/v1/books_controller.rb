@@ -7,13 +7,15 @@ class Api::V1::BooksController < ApplicationController
     all_books = Book.includes(:images)
     all_books.each do | book |
       book_src = book.images.pluck(:src)
-      object = 
-      { id: book.id, 
+      object = {
+        id: book.id, 
         title: book.title, 
         author: book.author,
         body: book.body,
-        created_at: book.created_at,
-        imageUrl: book_src }
+        imageUrl: book_src,
+        publisher: book.publisher 
+      }
+
       output.append(object)
     end
 
