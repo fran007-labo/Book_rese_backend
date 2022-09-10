@@ -14,7 +14,7 @@ services:
       context: ./
       dockerfile: Dockerfile.development
     command: /bin/sh -c "rm -f ./tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
-    image: rails:dev
+    image: rails-book-rese:dev
     stdin_open: true
     tty: true
     volumes:
@@ -35,16 +35,6 @@ services:
       - 6379:6379
     volumes:
       - "./app/redis:/data"
-  # frontend:
-  #   build: 
-  #     context: ./frontend/
-  #     dockerfile: Dockerfile
-  #   tty: true
-  #   volumes:
-  #     - ./frontend:/app
-  #   command: sh -c "yarn start"
-  #   ports:
-  #     - 3000:3000
 volumes:
   postgres-data:
     driver: local

@@ -31,9 +31,6 @@ class Api::V1::BooksController < ApplicationController
   end
   
   def create
-    
-    binding.pry
-    
     book = Book.create!(book_params)
 
     if book

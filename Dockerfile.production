@@ -1,45 +1,43 @@
-FROM ruby:2.7.4
-
-# 以下の記述を追加
-ENV RAILS_ENV=production
-
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get update && \
-    apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev sudo vim
-
-RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && apt-get install -y yarn && apt-get install imagemagick
-
-
-RUN yarn add node-sass
+FROM ruby:2.7.4 AS base
 
 WORKDIR /app
-RUN mkdir -p tmp/pids
-RUN mkdir -p tmp/sockets
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-# COPY yarn.lock /app
-# COPY package.json /app
-RUN bundle install
-# ここでyarn installをしないとwebpackerを実行できない
-# RUN yarn install
-COPY . /app
+ENV RAILS_ENV production
+ENV NODE_MAJOR_VERSION 14
+ENV BUNDLE_DEPLOYMENT true
+ENV BUNDLE_PATH vendor/bundle
+ENV BUNDLE_WITHOUT development:test
+RUN gem update --system && gem install bundler:2.1.4
 
-# RUN yarn add jquery popper.js bootstrap
+# builder
+FROM base AS builder
 
-# WARNING:webpack:installをするとwebpackの設定ファイルが初期化されてjqueryなどが使えなくなってしまう
-# RUN rails webpacker:install
-# RUN NODE_ENV=production ./bin/webpack
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_MAJOR_VERSION.x | bash - && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list && \
+    apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+    vim locales build-essential curl libpq-dev libmariadb-dev nodejs yarn nginx sudo
 
-COPY entrypoint_production.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint_production.sh
-ENTRYPOINT ["entrypoint_production.sh"]
+# bundle
+FROM builder AS bundle
 
-# 以下の記述があることでnginxから見ることができる
-VOLUME /app/public
-VOLUME /app/tmp
+COPY Gemfile .
+COPY Gemfile.lock .
+RUN bundle install --jobs=4 --retry=3 && rm -rf $BUNDLE_PATH/ruby/$RUBY_VERSION/cache/*
 
-CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+# main
+FROM builder AS main
+
+COPY . .
+
+COPY --from=bundle /app/vendor/bundle /app/vendor/bundle
+
+# nginx
+RUN groupadd nginx
+RUN useradd -g nginx nginx
+ADD ./nginx/nginx.conf /etc/nginx/nginx.conf
+ADD ./entrypoint_production.sh /app/entrypoint_production.sh
+
+EXPOSE 80
+
+RUN chmod +x /app/entrypoint_production.sh

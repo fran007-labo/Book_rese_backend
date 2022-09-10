@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         resources :sign_outs    , only: [:create]
       end
 
-      resources :books        , only: [:index, :create, :update, :destroy] do
+      resources :books do
         scope module: :carts do
           resources :add_books, only: [:create]
           resources :remove_books, only: [:create]
