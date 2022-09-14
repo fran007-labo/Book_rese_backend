@@ -1,6 +1,6 @@
-class Api::V1::Reservations::ReservationController < Api::V1::Reservations::ApplicationController
+class Api::V1::ReservationController < ApplicationController
 
-  def show
-
+  def create
+    
   end
 end 

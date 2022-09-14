@@ -12,6 +12,8 @@ Rails.application.routes.draw do
         resources :carts, only: [:index]
       end
 
+      resources :check_outs, only: [:create]
+
       resources :books do
         scope module: :carts do
           resources :add_books, only: [:create]
