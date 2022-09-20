@@ -3,9 +3,7 @@ FROM ruby:2.7.4
 ENV LANG=C.UTF-8 \
   TZ=Asia/Tokyo
   
-# コメントを外す
-# ENV RAILS_ENV=production
-# コメントを外す
+ENV RAILS_ENV=production
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /myapp
@@ -14,11 +12,9 @@ COPY Gemfile.lock .
 RUN bundle install
 COPY --chown=app:app . /myapp
 
-# コメントを外す
-# COPY entrypoint_production.sh /usr/bin/
-# RUN chmod +x /usr/bin/entrypoint_production.sh
-# ENTRYPOINT ["entrypoint_production.sh"]
-# コメントを外す
+COPY entrypoint_production.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint_production.sh
+ENTRYPOINT ["entrypoint_production.sh"]
 
 RUN mkdir -p tmp/sockets
 RUN mkdir -p tmp/pids
