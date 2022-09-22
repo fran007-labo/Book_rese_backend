@@ -13,22 +13,33 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile.development
-    command: /bin/sh -c "rm -f ./tmp/pids/server.pid && bundle exec rails s -p 8000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
     image: rails-book-rese:dev
     stdin_open: true
     tty: true
     volumes:
-      - ./:/Book-rese-backend
-      - ./vendor/bundle:/Book-rese-backend/vendor/bundle
+      - ./:/myapp
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+      - log-data:/myapp/log
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
       REDIS_URL: redis://redis:6379/0
-    ports:
-      - 8000:8000
     depends_on:
       - db
       - redis
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile.nginx
+    volumes:
+      - public-data:/myapp/public
+      - tmp-data:/myapp/tmp
+    ports:
+      - 80:80
+    depends_on:
+      - backend
   redis:
     image: redis
     ports:
@@ -38,3 +49,7 @@ services:
 volumes:
   postgres-data:
     driver: local
+
+  public-data:
+  tmp-data:
+  log-data:
