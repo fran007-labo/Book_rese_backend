@@ -33,6 +33,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.nginx
+    image: nginx:dev
     volumes:
       - public-data:/myapp/public
       - tmp-data:/myapp/tmp
