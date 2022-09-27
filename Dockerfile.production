@@ -6,7 +6,6 @@ ENV LANG=C.UTF-8 \
 ENV RAILS_ENV=production
 
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
-RUN apt-get install -y vim
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile

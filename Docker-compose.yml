@@ -13,8 +13,8 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile.development
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
-    image: rails-book-rese:dev
+    # command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+    image: rails-dev
     stdin_open: true
     tty: true
     volumes:
@@ -39,8 +39,6 @@ services:
       - tmp-data:/myapp/tmp
     ports:
       - 80:80
-    depends_on:
-      - backend
   redis:
     image: redis
     ports:
