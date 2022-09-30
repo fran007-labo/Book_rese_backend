@@ -1,10 +1,10 @@
-user = User.create(
+user = User.create!(
   name: 'user',
   uid: 'nrelkamklsdjafewfwel'
 )
 
 50.times do |n|
-  Book.create(
+  Book.create!(
     title:     Faker::Book.title, 
     author:    Faker::Book.author, 
     publisher: Faker::Book.publisher,
@@ -13,7 +13,7 @@ user = User.create(
   )
 
   2.times do 
-    Image.create( 
+    Image.create!(
       src: 'https://picsum.photos/150',
       book_id: n + 1
     )

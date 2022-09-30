@@ -2,16 +2,14 @@ FROM ruby:2.7.4
 
 ENV LANG=C.UTF-8 \
   TZ=Asia/Tokyo
-  
-ENV RAILS_ENV=production
-
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+ENV RAILS_ENV="production"
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client && apt-get install -y vim
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN bundle install
-COPY --chown=app:app . /myapp
+COPY  . /myapp
 
 COPY entrypoint_production.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint_production.sh
@@ -23,4 +21,4 @@ RUN mkdir -p tmp/pids
 VOLUME /myapp/public
 VOLUME /myapp/tmp
 
-CMD /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
+CMD /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb -e production"
