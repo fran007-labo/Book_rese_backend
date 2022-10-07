@@ -7,7 +7,12 @@ Rails.application.routes.draw do
         resources :registrations, only: [:create]
         resources :sign_outs    , only: [:create]
       end
+      
+      resources :dashboards, only: [:index]
 
+      # ↓dashboards/users/(:id)は特定のuserがどんな本を借りたのか見るため。
+      get 'dashboards/users/:id', to:  "dashboards#show"
+    
       scope module: :carts do
         resources :carts, only: [:index]
       end

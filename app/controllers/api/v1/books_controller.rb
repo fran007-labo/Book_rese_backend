@@ -31,10 +31,11 @@ class Api::V1::BooksController < ApplicationController
   end
   
   def create
-    book = Book.create!(book_params)
-
-    if book
-      image = Image.create!(book_id: book.id, src: params[:images][0][:path])
+    book = Book.new(stings_data_params)
+    if book.save
+      # image = Image.create!(book_id: book.id, src: params[:images][0][:path])
+      image = Image.new(book_id: book.id, src: params[:images])
+      image.save
       head 200
     else
       head 404
@@ -50,12 +51,12 @@ class Api::V1::BooksController < ApplicationController
   end
 
   private
-  def book_params
-    params.require(:books).permit(:title, :author, :publisher, :body).merge(user_id: current_user.id)
+  def stings_data_params
+    params.require(:stringsData).permit(:title, :author, :publisher, :body).merge(user_id: current_user.id)
   end
 
-  # def image_params
-  #   params.require(:images).permit(:src)
-  # end
+  def image_params
+    params.require(:images)
+  end
 
 end
