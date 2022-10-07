@@ -31,10 +31,10 @@ class Api::V1::BooksController < ApplicationController
   end
   
   def create
-    book = Book.new(stings_data_params)
-    if book.save
+    book = Book.create!(stings_data_params)
+    if book
       # image = Image.create!(book_id: book.id, src: params[:images][0][:path])
-      image = Image.new(book_id: book.id, src: params[:images])
+      image = Image.new(book_id: book.id, src: params[:images][0])
       image.save
       head 200
     else
