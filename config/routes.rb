@@ -10,8 +10,8 @@ Rails.application.routes.draw do
       
       resources :dashboards, only: [:index]
 
-      # ↓dashboards/users/(:id)は特定のuserがどんな本を借りたのか見るため。
-      get 'dashboards/users/:id', to:  "dashboards#show"
+      # ↓dashboards/users/ownはcurrent_userがどんな本を借りたのか見るため。
+      get 'dashboards/users/own', to:  "dashboards#show"
     
       scope module: :carts do
         resources :carts, only: [:index]

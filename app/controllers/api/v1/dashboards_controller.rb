@@ -32,11 +32,11 @@ class Api::V1::DashboardsController < ApplicationController
   def show 
     output = []
 
-    user_reservations = Reservation.where(user_id: params[:id]).includes(:book)
+    user_reservations = Reservation.where(user_id: current_user.id).includes(:book)
 
     user_reservations.each do |reservation|
       reserved_book_name = reservation.book.title
-      reserved_book_img = reservation.book.images
+      reserved_book_img = reservation.book.images.pluck(:src)[0]
       start_date = reservation.start_date
       return_date = reservation.return_date
 
