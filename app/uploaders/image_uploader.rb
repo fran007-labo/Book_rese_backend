@@ -1,11 +1,15 @@
 class ImageUploader < CarrierWave::Uploader::Base
-  storage :file
-
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "#{model.class.to_s.underscore}/#{mounted_as}/"
   end
 
-  def extension_allowlist
-    %w(jpg jpeg png)
+  if Rails.env.development?
+    # storage :file
+    storage :fog
+
+  # elsif Rails.env.test?
+  #   storage :file
+  # else
+  #   storage :fog
   end
 end

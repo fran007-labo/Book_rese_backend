@@ -79,6 +79,7 @@ GEM
       dotenv (= 2.7.6)
       railties (>= 3.2)
     erubi (1.10.0)
+    excon (0.93.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -96,6 +97,22 @@ GEM
       jwt (~> 2.1, >= 2.1.0)
       redis (~> 4.0, >= 4.0.1)
       redis-namespace (~> 1.6, >= 1.6.0)
+    fog-aws (3.15.0)
+      fog-core (~> 2.1)
+      fog-json (~> 1.1)
+      fog-xml (~> 0.1)
+    fog-core (2.3.0)
+      builder
+      excon (~> 0.71)
+      formatador (>= 0.2, < 2.0)
+      mime-types
+    fog-json (1.2.0)
+      fog-core
+      multi_json (~> 1.10)
+    fog-xml (0.1.4)
+      fog-core
+      nokogiri (>= 1.5.11, < 2.0.0)
+    formatador (1.1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     httparty (0.20.0)
@@ -125,6 +142,7 @@ GEM
     mini_portile2 (2.8.0)
     minitest (5.15.0)
     msgpack (1.4.5)
+    multi_json (1.15.0)
     multi_xml (0.6.0)
     nio4r (2.5.8)
     nokogiri (1.13.3)
@@ -231,6 +249,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   firebase-auth-rails
+  fog-aws
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
   pry-rails
