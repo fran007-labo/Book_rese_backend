@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2022_08_09_072328) do
     t.bigint "book_id", null: false
     t.date "start_date", null: false
     t.date "return_date", null: false
+    t.boolean "is_return", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["book_id"], name: "index_reservations_on_book_id"

@@ -14,7 +14,7 @@ class Api::V1::Carts::CartsController < Api::V1::Carts::ApplicationController
         author: book.author,
         body: book.body,
         imageUrl: image.src.identifier,
-        publisher: book.publisher 
+        publisher: book.publisher
       }
       output.append(object)
     end

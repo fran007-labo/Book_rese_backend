@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
       # ↓dashboards/users/ownはcurrent_userがどんな本を借りたのか見るため。
       get 'dashboards/users/own', to:  "dashboards#show"
+
+      post 'reservations/:id/return', to: "reservations#return"
     
       scope module: :carts do
         resources :carts, only: [:index]
