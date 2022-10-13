@@ -33,13 +33,21 @@ class Api::V1::BooksController < ApplicationController
   def create
     book = Book.create!(stings_data_params)
     if book
-      # image = Image.create!(book_id: book.id, src: params[:images][0][:path])
-      image = Image.new(book_id: book.id, src: params[:images][0])
-      image.save
-      head 200
+      if params[:images].present?
+        image = Image.new(book_id: book.id, src: params[:images][0])
+        image.save
+      end
+      flash_message = "本の登録が完了しました。"
+      flash_status = 'success'
     else
-      head 404
+      flash_message = "必須項目を入力して下さい"
+      flash_status = 'error'
     end
+
+    render json: {
+      message: flash_message,
+      status: flash_status
+    }
   end
 
   def destroy
