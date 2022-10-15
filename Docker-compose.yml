@@ -25,7 +25,6 @@ services:
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
-      REDIS_URL: redis://redis:6379/0
     depends_on:
       - db
       - redis
@@ -40,11 +39,10 @@ services:
     ports:
       - 8000:80
   redis:
+    build:
+      context: ./
+      dockerfile: Dockerfile.redis
     image: redis
-    ports:
-      - 6379:6379
-    volumes:
-      - "./app/redis:/data"
 volumes:
   postgres-data:
     driver: local

@@ -105,4 +105,5 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+  ENV["REDIS_URL"] = "redis://book-rese-redis.pblaag.ng.0001.apne1.cache.amazonaws.com:6379/0"
 end

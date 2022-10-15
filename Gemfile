@@ -13,6 +13,7 @@ gem 'pry-rails'
 gem 'carrierwave'
 gem 'faker'
 gem 'fog-aws'
+gem 'redis'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
