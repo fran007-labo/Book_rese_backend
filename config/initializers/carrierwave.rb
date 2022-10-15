@@ -4,11 +4,10 @@ require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
   case Rails.env
-  # when 'development', 'test'
-  #   config.storage = :file
-  #   config.cache_storage = :file
-  # when 'production'
-  when 'development'
+  when 'development', 'test'
+    config.storage = :file
+    config.cache_storage = :file
+  when 'production'
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['S3_ACCESS_KEY_ID'], # アクセスキー
