@@ -9,20 +9,22 @@ class Api::V1::DashboardsController < ApplicationController
     end
 
     reservations.each do |reservation|
-      user_id = reservation.user_id
-      user_name = reservation.user.name
-      start_date = reservation.start_date
+      user_name   = reservation.user.name
+      book_title  = reservation.book.title
+      book_img    = reservation.book.images.pluck(:src)[0]
+      start_date  = reservation.start_date
       return_date = reservation.return_date
-      book_count = reservations.where(user_id: user_id, start_date: start_date, return_date: return_date).count
-      is_return = reservation.is_return
+      is_return   = reservation.is_return
 
       object = {
         userName: user_name,
-        bookCount: book_count,
+        bookTitle: book_title,
+        bookImg: book_img,
         startDate: start_date,
         returnDate: return_date,
         isReturn: is_return
       }
+
       output.append(object)
     end
 
