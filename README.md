@@ -23,8 +23,13 @@
   - Rspec
   - Factory_bot_rails
 - インフラ
-  - AWS Ecs fargate
-  - Nginx(webサーバー)
+  - AWS ECS(fargate)　 railsデプロイ環境
+  - Docker ローカル開発環境
+  - 画像保存先 -> S3
+  - NGINX webサーバー
+  - puma (アプリケーションサーバー)
+  - AWS Amplify フロントデプロイ環境
+
 - その他
   - Firebase auth rails
   - Carrierwave
