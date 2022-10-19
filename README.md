@@ -29,3 +29,9 @@
   - Firebase auth rails
   - Carrierwave
   - Mini_magick
+
+# 4,　成果物
+https://main.d2d7pygf1vwixv.amplifyapp.com/lp
+
+# 5,　成果物DEMO video
+https://www.youtube.com/watch?v=Wbja3NbmUlM
